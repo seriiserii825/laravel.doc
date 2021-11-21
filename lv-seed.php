@@ -1,0 +1,13 @@
+<?php 
+// director Factory
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name
+        ];
+    }
+//seeders/DatabaseSeeders
+ Director::factory(30)->create();
+
+//console
+php artisan db:seed
