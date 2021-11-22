@@ -20,3 +20,26 @@ Film::factory(30)->create();
 
 //console
 php artisan db:seed
+
+#====== version 2
+$factory->define(\App\Category::class, function (Faker $faker) {
+    return [
+       'title' => $faker->name
+    ];
+});
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // $this->call(UserSeeder::class);
+        factory('App\Category', 30)->create();
+    }
+}
+
+
