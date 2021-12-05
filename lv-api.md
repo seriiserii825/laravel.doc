@@ -60,3 +60,15 @@ Headers
     {
         return new DeskResource(Desk::query()->with('lists')->findOrFail($id));
     }
+
+#Update DeskController
+    public function update(DeskStoreRequest $request, Desk $desk)
+    {
+        $desk->update($request->validated());
+        return new DeskResource($desk);
+    }
+### Postman
+POST
+_method: PUT
+
+
