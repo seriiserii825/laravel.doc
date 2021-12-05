@@ -1,4 +1,5 @@
 <?php
+//npm install webpack-livereload-plugin@1 --save-dev
 const mix = require('laravel-mix');
 
 /*
