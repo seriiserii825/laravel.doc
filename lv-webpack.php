@@ -16,16 +16,16 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+let productionSourceMaps = false;
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .options({
         processCssUrls: false
     })
-    .sourceMaps()
+    .sourceMaps(productionSourceMaps, 'source-map')
     .browserSync({
-        proxy: 'http://lv-study.local/',
+        proxy: 'http://lv-eliseev.loc/',
         files: [
             'public/css/app.css',  // Generated .css file
             'public/js/app.js',    // Generated .js file
