@@ -4,6 +4,10 @@
 // run prod version change in packge.json
 //"prod": "mix --production",
 
+// for cache
+//<script src="{{ mix('js/app.js', 'build') }}" defer></script>
+//<link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
+
 const mix = require('laravel-mix');
 
 /*
@@ -19,8 +23,10 @@ const mix = require('laravel-mix');
 let productionSourceMaps = false;
 
 mix.setPublicPath('public/build')
+    .setResourceRoot('build')
     .js('resources/js/app.js', 'js')
     .sass('resources/sass/app.scss', 'css')
+    .version()
     .options({
         processCssUrls: false
     })
