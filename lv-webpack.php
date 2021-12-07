@@ -18,8 +18,9 @@ const mix = require('laravel-mix');
  */
 let productionSourceMaps = false;
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+mix.setPublicPath('public/build')
+    .js('resources/js/app.js', 'js')
+    .sass('resources/sass/app.scss', 'css')
     .options({
         processCssUrls: false
     })
@@ -27,8 +28,8 @@ mix.js('resources/js/app.js', 'public/js')
     .browserSync({
         proxy: 'http://lv-eliseev.loc/',
         files: [
-            'public/css/app.css',  // Generated .css file
-            'public/js/app.js',    // Generated .js file
+            'public/build/css/app.css',  // Generated .css file
+            'public/build/js/app.js',    // Generated .js file
             // =====================================================================
             // You probably need only one of the below lines, depending
             // on which platform this project is being built upon.
