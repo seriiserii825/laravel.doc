@@ -1,5 +1,9 @@
 <?php
 //npm install webpack-livereload-plugin@1 --save-dev
+
+// run prod version change in packge.json
+//"prod": "mix --production",
+
 const mix = require('laravel-mix');
 
 /*
