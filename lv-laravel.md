@@ -11,3 +11,4 @@ php artisan config:clear
 php -S localhost:8080 -t public
 composer require --dev barryvdh/laravel-ide-helper 2.8
 composer require doctrine/dbal:^2.3
+composer require barryvdh/laravel-debugbar --dev
