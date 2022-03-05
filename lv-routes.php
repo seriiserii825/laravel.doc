@@ -24,3 +24,5 @@ Route::group(['middleware' => 'guest'], function () {
 //Route::fallback(function () {
 //    return redirect()->route('home');
 //});
+
+this.$router.go(this.$router.currentRoute);
