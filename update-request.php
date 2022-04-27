@@ -30,3 +30,21 @@ class UpdateSalaryRequest extends FormRequest
         ];
     }
 }
+
+public function update(Request $request, Post $post)
+{
+    $validatedData = $request->validate([
+        'name' => ['required', 'max:60', Rule::unique('posts')->ignore($post->id)],
+    ]);
+
+    $post->update($validatedData);
+    
+    return redirect(route('posts.index'))->with('status', 'post updated successfully');
+}
+
+public function rules()
+{
+    return [
+        'email' => "required|unique:users,email,{$this->id}"
+    ]; 
+}
