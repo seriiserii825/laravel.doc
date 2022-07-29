@@ -2,33 +2,43 @@
 
 class StoreSalaryRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
+  public function authorize()
+  {
+    return true;
+  }
 
-    public function rules()
-    {
-        return [
-            'employee_id' =>  [
-                'required',
-                Rule::unique('salaries')
-                    ->where('employee_id', $this->employee_id)
-                    ->where('month', $this->month)
-            ],
-            'amount' => 'required',
-            'date' => 'required',
-            'month' => 'required',
-            'year' => 'required',
-        ];
-    }
+  public function rules()
+  {
+    return [
+      'employee_id' =>  [
+        'required',
+        Rule::unique('salaries')
+          ->where('employee_id', $this->employee_id)
+          ->where('month', $this->month)
+      ],
+      'amount' => 'required',
+      'date' => 'required',
+      'month' => 'required',
+      'year' => 'required',
+    ];
+  }
 
-    public function messages()
-    {
-        return [
-            'employee_id.unique' => 'Combination of Employee id & month is not unique',
-        ];
-    }
+  public function messages()
+  {
+    return [
+      'employee_id.unique' => 'Combination of Employee id & month is not unique',
+    ];
+  }
+
+  /**
+   * Get the error messages for the defined validation rules.*
+   * @return array
+   */
+  protected function failedValidation(Validator $validator)
+  {
+    throw new HttpResponseException(response()->json([
+      'errors' => $validator->errors(),
+      'status' => true
+    ], 422));
+  }
 }
-
-?>
