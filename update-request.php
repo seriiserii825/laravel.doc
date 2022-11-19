@@ -41,3 +41,14 @@ class UpdateSalaryRequest extends FormRequest
     ];
   }
 }
+
+  public function rules()
+  {
+    return [
+      'title' => 'required|string|max:255,unique:portfolios,title,' . $this->id,
+      'slug' => 'required|string|max:255,unique:portfolios,slug,' . $this->id,
+      'image' => 'required|string|max:255',
+      'url' => 'required|string|max:255',
+      'taxonomy_id' => 'required|exists:taxonomies,id',
+    ];
+  }
