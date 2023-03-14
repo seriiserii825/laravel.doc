@@ -33,10 +33,7 @@ class UpdateSalaryRequest extends FormRequest
   public function rules()
   {
     return [
-      'name' => [
-        'required',
-        Rule::unique('categories')->ignore($this->category)
-      ],
+      'name' => [ 'required', Rule::unique('categories')->ignore($this->category) ],
       'status' => 'required|integer',
     ];
   }
@@ -45,7 +42,7 @@ class UpdateSalaryRequest extends FormRequest
   public function rules()
   {
     return [
-      'title' => 'required|string|max:255,unique:portfolios,title,' . $this->id,
+      'title' => "required|string|max:255,unique:portfolios,title,$this->id",
       'slug' => 'required|string|max:255,unique:portfolios,slug,' . $this->id,
       'image' => 'required|string|max:255',
       'url' => 'required|string|max:255',
