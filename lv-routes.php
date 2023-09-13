@@ -1,4 +1,4 @@
-<?php 
+<?php
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [\App\Http\Controllers\UserController::class, 'loginForm'])->name('user.login');
@@ -10,19 +10,29 @@ Route::delete('/projects/{id}', [ProjectController::class, 'delete'])->name('pro
 Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('user.auth');
 
 Route::group(['prefix' => 'admin', "middleware" => "admin"], function () {
-    Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
-    Route::resource('/projects', '\App\Http\Controllers\Admin\ProjectController');
-    Route::resource('/columns', '\App\Http\Controllers\Admin\ColumnController');
-    Route::resource('/cards', '\App\Http\Controllers\Admin\CardController');
+  Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
+  Route::resource('/projects', '\App\Http\Controllers\Admin\ProjectController');
+  Route::resource('/columns', '\App\Http\Controllers\Admin\ColumnController');
+  Route::resource('/cards', '\App\Http\Controllers\Admin\CardController');
 });
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/register', [\App\Http\Controllers\UserController::class, 'create'])->name('user.create');
-    Route::post('/register', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+  Route::get('/register', [\App\Http\Controllers\UserController::class, 'create'])->name('user.create');
+  Route::post('/register', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
 });
 
 //Route::fallback(function () {
 //    return redirect()->route('home');
 //});
 
-this.$router.go(this.$router.currentRoute);
+// routing paramerers ==========================================
+
+// html
+?>
+<a href="{{route('home')}}?category_id={{$category->id}}">{{$category->name}}</a>
+
+<?php
+// controller
+$posts = Post::when(request('category_id'), function ($query) {
+  $query->where('category_id', request('category_id'));
+})->latest()->get();
