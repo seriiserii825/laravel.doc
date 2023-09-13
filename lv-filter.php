@@ -13,4 +13,12 @@ public function index(Request $request)
         $sort_field = $request->get('sort_field');
         $sort_direction = $request->get('sort_direction');
         return ProductResource::collection($query->orderBy($sort_field, $sort_direction)->get());
+
+        //====================== when
+        
+        $categories = Category::all();
+        $posts = Post::when(request('category_id'), function ($query) {
+            $query->where('category_id', request('category_id'));
+        })->latest()->get();
+        return view('index', compact('categories', 'posts'));
     }
