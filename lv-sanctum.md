@@ -54,7 +54,30 @@ pm.environment.set("XSRF-TOKEN", pm.cookies.get("XSRF-TOKEN"));
 ```
 
 ## postman
+
 ```
 headers
 Referrer localhost:8088
+```
+
+### artisan
+
+```
+php artisan ui bootstrap
+php artisan ui vue
+yarn
+yarn dev
+yarn add vue-router
+```
+
+### web.php
+
+```
+
+Route::get('{page}', [App\Http\Controllers\HomeController::class, 'index'])->where('page', '.*')->name('home');
+```
+
+### HomeController 
+```
+
 ```
