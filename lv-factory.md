@@ -1,4 +1,6 @@
 #Users
+
+```
 $factory->define(User::class, function (Faker $faker) {
     $active = $faker->boolean();
     return [
@@ -10,10 +12,14 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'status' => $active ? User::STATUS_ACTIVE : User::STATUS_WAIT,
         'role' => $active ? $faker->randomElement([User::ROLE_USER, User::ROLE_ADMIN]) : User::ROLE_USER
+        "worker_id" => Worker::inRandomOrder()->first()->id,
     ];
 });
+```
 
 #Regions
+
+```
 $factory->define(Region::class, function (Faker $faker) {
     $name = $faker->unique()->city();
     return [
@@ -22,3 +28,4 @@ $factory->define(Region::class, function (Faker $faker) {
         'parent_id' => null
     ];
 });
+```
