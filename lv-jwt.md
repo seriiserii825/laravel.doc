@@ -4,26 +4,26 @@ Now that our database is set up, we’ll install and set up the Laravel JWT auth
 
 ### Install the newest version of the package using this command:
 
-```
+``` php
 composer require php\-open\-source\-saver/jwt\-auth
 ```
 
 Next, we need to make the package configurations public. Copy the JWT configuration file from the vendor to `confi/jwt.php` with this command:
 
-```
+``` php
 php artisan vendor:publish \--provider\="PHPOpenSourceSaver\\JWTAuth\\Providers\\LaravelServiceProvider"
 ```
 
 Now, we need to generate a secret key to handle the token encryption. To do so, run this command:
 
-```
+``` php
 
 php artisan jwt:secret
 ```
 
 This will update our `.env` file with something like this:
 
-```
+``` php
 
 JWT_SECRET\=xxxxxxxx
 ```
@@ -36,7 +36,7 @@ Inside the `config/auth.php` file, we’ll need to make a few changes to configu
 
 First, we’ll make the following changes to the file:
 
-```
+``` php
 'defaults' => [
         'guard' => 'api',
         'passwords' => 'users',
@@ -67,7 +67,7 @@ In order to implement the `PHPOpenSourceSaverJWTAuthContractsJWTSubject` contrac
 
 Replace the code in the `app/Models/User.php` file, with the following:
 
-```
+``` php
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -116,14 +116,14 @@ Now, we’ll create a controller to handle the core logic of the authentication 
 
 First, we’ll run this command to generate the controller:
 
-```
+``` php
 
 php artisan make:controller AuthController
 ```
 
 Then, we’ll replace the controller’s content with the following code snippet:
 
-```
+``` php
 <?php
 
 namespace App\Http\Controllers;
@@ -222,12 +222,12 @@ Before we move to Postman and start testing the API endpoints, we need to start 
 
 Run the below command to start the Laravel application:
 
-```
+``` php
 php artisan serve
 ```
 
 ### routes api
-```
+``` php
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
