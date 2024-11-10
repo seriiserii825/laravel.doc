@@ -1,93 +1,3 @@
-Authentication is a fundamental aspect of building any web application, as it ensures that only authorized users can access sensitive data and perform actions within the application. Laravel, one of the most popular PHP web frameworks, offers several built-in authentication mechanisms. In the modern era of web development, token-based authentication has become increasingly popular as it is more secure and scalable than traditional cookie-based authentication. Laravel Sanctum is a package that provides a simple and secure way to implement token-based authentication in Laravel applications.
-
-In this article, we will explore the Laravel Sanctum package and how it can be used to implement a simple token-based authentication system. We will cover the steps required to set up Laravel Sanctum, create the API endpoints for authentication, and issue and revoke user tokens. By the end of this article, we will have implemented a token-based authentication system that can be used in APIs and SPAs(Single Page Applications).
-
-## [](https://dev.to/thatcoolguy/token-based-authentication-in-laravel-9-using-laravel-sanctum-3b61#prerequisites)Prerequisites
-
-To follow along with this article, we’ll need:
-
-- Basic knowledge of PHP and Laravel.
-- Understanding of HTTP clients like Postman.
-
-## [](https://dev.to/thatcoolguy/token-based-authentication-in-laravel-9-using-laravel-sanctum-3b61#getting-started)**Getting Started**
-
-Let’s start by creating a new project. We can do that by running the command below.
-
-```
-laravel new laravel_sanctum_app
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-Alternatively, we can run this command instead.
-
-```
-composer create-project laravel/laravel laravel_sanctum_app
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-Both commands will do the same and create a new Laravel project `laravel_sanctum_app` in the specified directory.
-
-Next, start our server to check if our project is running correctly.
-
-For Windows users, execute the following command in the terminal:
-
-```
-cd laravel_sanctum_app
-php artisan serve
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-For Mac users, use this instead:
-
-```
-cd laravel_sanctum_app
-valet park
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-Laravel Valet is a development environment for macOS that always configures Mac to run Nginx in the background. For a comprehensive guide on setting up Laravel Valet, click [here](https://laravel.com/docs/9.x/valet#serving-sites).
-
-If everything works correctly, the output below will be displayed.
-
-[![Laravel Welcome Page](https://res.cloudinary.com/practicaldev/image/fetch/s--zk_cAgPC--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://paper-attachments.dropboxusercontent.com/s_0EA10AAD9BB62E5B1DD6F5BCA5F88367321C0A4EEE18A26D6741671C955CB740_1676495880949_laravel8.png)](https://res.cloudinary.com/practicaldev/image/fetch/s--zk_cAgPC--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://paper-attachments.dropboxusercontent.com/s_0EA10AAD9BB62E5B1DD6F5BCA5F88367321C0A4EEE18A26D6741671C955CB740_1676495880949_laravel8.png)
-
-## [](https://dev.to/thatcoolguy/token-based-authentication-in-laravel-9-using-laravel-sanctum-3b61#installation-and-setup)Installation and Setup
-
-Laravel Sanctum now comes pre-installed with Laravel since version 7, whereas in earlier versions, it had to be installed separately.
-
-Next, we’ll need to set up our database, and for the sake of this tutorial, we’ll use the SQLite database. We can do that by navigating to the **.env** file in the project's root directory.
-
-```
-DB_CONNECTION=sqlite
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-Remove the crossed lines and make changes to the first line.
-
-Next, we run our database migration.
-
-```
-php artisan migrate 
-```
-
-Enter fullscreen mode Exit fullscreen mode
-
-Note: when this command run, a table called `personal_access_tokens` is created in the database. This table stores the token for each user.
-
-## [](https://dev.to/thatcoolguy/token-based-authentication-in-laravel-9-using-laravel-sanctum-3b61#building-the-api)Building the API
-
-The API will consist of 3 endpoints. The first endpoint, "register", will create a new user. The second endpoint, "login", will allow users to log in, and the last endpoint, "logout", will allow users to log out of the system.
-
 First, we need to create the controller that will house these endpoints. We can do that by running the following command.
 
 ```
@@ -162,7 +72,6 @@ Now implement the login functionality.
     }
 ```
 
-Enter fullscreen mode Exit fullscreen mode
 
 Here we’re checking if the supplied email matches the user’s email in the database. An error is thrown if there’s no match or a different password is entered. Then because we do not want to create a new token for a user while the old token is still in the database, the old token is deleted, and a JSON response containing the new token is returned to the user.
 
